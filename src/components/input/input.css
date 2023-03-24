@@ -1,0 +1,193 @@
+.input-search {
+  width: 200px;
+  height: 32px;
+  line-height: 32pxa;
+  outline: none;
+  border: unset;
+}
+
+.input-cb {
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+}
+.title-input{
+  margin-top: 25px;
+}
+.pd-left-0{
+  padding-left: 0px !important;
+  width: 100%;
+  padding-right: 0px !important;
+}
+.text-form {
+  width: 100%;
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid #E0E0E0;
+  padding: 0px 12px;
+  position: relative;
+  font-size: 14px;
+}
+.border-input{
+  /* border: 1px solid #E0E0E0; */
+}
+.text-form::placeholder {
+  color: #9E9E9E;
+  font-size: 10px;
+}
+
+.input-search:focus .search__text,
+.text-form:focus {
+  border: 1px solid #50B83C !important;
+  outline: none;
+}
+
+input :focus{
+  border: 1px solid #50B83C !important;
+}
+
+.bd-red {
+  border: 1px solid red;
+}
+
+.text-date {
+  width: calc(100% - 24px);
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid #949090;
+  margin-top: 8px;
+  padding: 0px 12px;
+  cursor: pointer;
+  outline: none;
+}
+
+.text-date:focus {
+  border: 1px solid #50B83C;
+}
+
+input[type="radio"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+
+  font: inherit;
+  color: #50B83C;
+  width: 1.3em;
+  height: 1.3em;
+  border: 1px solid #9E9E9E;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.85em;
+  height: 0.85em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: #50B83C;
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+  border: 1px solid #50B83C;
+}
+
+label {
+  display: inline-block;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+label .check-box-effect {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  background-color: transparent;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #aea6a6;
+  border-radius: 10%;
+  left: 15px;
+}
+
+label .check-box-effect:before {
+  content: "";
+  width: 0px;
+  height: 2px;
+  border-radius: 2px;
+  background: #50B83C;
+  position: absolute;
+  transform: rotate(45deg);
+  top: 6px;
+  left: 4px;
+  transition: width 50ms ease 50ms;
+  transform-origin: 0% 0%;
+}
+
+label .check-box-effect:after {
+  content: "";
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: #50B83C;
+  position: absolute;
+  transform: rotate(305deg);
+  top: 10px;
+  left: 5px;
+  transition: width 50ms ease;
+  transform-origin: 0% 0%;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"]:checked+.check-box-effect {
+  background-color: #fff !important;
+  border: 2px solid #50B83C;
+}
+
+input[type="checkbox"]:checked+.check-box-effect:after {
+  width: 10px;
+  background: #50B83C;
+  transition: width 150ms ease 100ms;
+}
+
+input[type="checkbox"]:checked+.check-box-effect:before {
+  width: 5px;
+  background: #50B83C;
+  transition: width 150ms ease 100ms;
+}
+
+.text-gray::-webkit-datetime-edit {
+  color: #aaa;
+}
+
+.text-gray:focus::-webkit-datetime-edit {
+  color: #000;
+}
+
+.text-gray::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+}
+
+input[type=date]:required:invalid::-webkit-datetime-edit {
+  color: transparent;
+}
+
+input[type=date]:focus::-webkit-datetime-edit {
+  color: black !important;
+}

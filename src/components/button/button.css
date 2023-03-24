@@ -1,0 +1,72 @@
+.btn {
+    border: unset;
+    height: 36px;
+    background-color: #2ca01c;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0px 12px;
+    min-width: 50px; 
+    font-weight: 500;
+    outline: none;
+}
+.btn:focus,
+.btn:hover{
+    background-color: #5be041;
+}
+
+.btn-cancel{
+    position: absolute;
+    height: 36px;
+    width: 76px;
+    border:1px solid #E0E0E0;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    outline: none;
+    color: #111111;
+    margin-right: 8px;
+    left: 24px;
+}
+
+.btn-save{
+    position: absolute;
+    height: 38px;
+    width: 76px;
+    border:1px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    outline: none;
+    color: #111111;
+    margin-right: 16px;
+    right: 122px;
+}
+.btn-cancel-dialog:focus,
+.btn-cancel-dialog:hover,
+.btn-save:focus,
+.btn-save:hover,
+.btn-cancel:focus,
+.btn-cancel:hover {
+    background-color: rgb(213, 206, 206);
+}
+
+#btn-create{
+    height: 36px;
+    background-color: #2ba01c;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-size: 14;
+    border: none;
+    padding: 0 19px;
+    cursor: pointer;
+    outline: none;
+}
+.btn-dialog:focus,
+.btn-dialog:hover,
+#btn-create:focus,
+#btn-create:hover {
+    background-color: #51b83c;
+}

@@ -1,0 +1,133 @@
+.combobox{
+    position: relative;
+    height: 43px;
+    outline: none;
+}
+.comobox__button{
+    width: 36px;
+    height: 36px;
+    border-left: 1px solid #E0E0E0;
+    outline: none;
+}
+.title-cbb{
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 12px;
+}
+button{
+    border: unset;
+    background-color: unset;
+}
+.comobox__button:hover{
+    cursor: pointer;
+}
+.iconBtnCombobox{
+    height: 34px;
+    width: 34px;
+    background: transparent url("../../assets/images/Sprites.64af8f61.svg") no-repeat -549px -349px;
+    position: absolute;
+    right: -1px;
+    top: 9px;
+    background-color: #ECEEF1;
+
+}
+.combobox__input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+.combobox__data::-webkit-scrollbar{
+    width: 1px;
+}
+.combobox__data::-webkit-scrollbar-thumb{
+    background-color: #ECEEF1;
+}
+.combobox__data{
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    z-index: 999;
+    box-shadow: 0 0 6px #ccc;
+    box-sizing: border-box;
+    height: 140px;
+    overflow-y: auto;
+}
+.combobox-item{
+    height: 36px;
+    width: 100%;
+    background-color: #fff;
+   padding-top: 10px;
+   padding-left: 12px;
+    font-size: 13px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.combobox-item:hover{
+    background-color: #ECEEF1;
+    color: #2ca01c;
+}
+.item-select{
+    background-color: #2ca01c;
+    color: #fff;
+}
+
+.dropdown-base{
+    width: 200px;
+    position: relative;
+    height: 32px;
+    background-color: #fff;
+}
+.dropdown-base__button{
+    width: 34px;
+    height: 30px;
+    position: absolute;
+    right: -4px;
+    top: 8px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+.dropdown-base__button:hover{
+    cursor: pointer;
+    background-color: #ECEEF1;
+}
+.iconBtndropdown-base{
+    background: transparent url("../../assets/images/Sprites.64af8f61.svg") no-repeat -549px -351px;
+}
+.dropdown-base__input{
+    box-sizing: border-box;
+    width: 205px;
+    height: 100%;
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #E0E0E0;
+}
+.dropdown-base__data{
+    width: 100%;
+    position: absolute;
+    top: -500%;
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    box-shadow: 0 0 6px #ccc;
+    box-sizing: border-box;
+}
+.dropdown-base-item{
+    height: 32px;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #E0E0E0;
+    padding-left: 12px;
+    padding-top: 8px;
+    font-size: 13px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.dropdown-base-item:hover{
+    background-color: #ECEEF1;
+    color: #2ca01c;
+}
+.item-select{
+    background-color: #2ca01c;
+    color: #fff;
+}
