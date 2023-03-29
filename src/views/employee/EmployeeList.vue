@@ -548,7 +548,7 @@ export default {
      */
     async btnDeleteEmployee() {
       await this.diy.showDialog();
-      this.diy.clearDialogDeleteEmployees();
+      this.diy.clearDialogDeletes();
       this.clearDialogDelete();
       this.diy.clearBtnCancel();
     },

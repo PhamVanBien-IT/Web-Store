@@ -7,7 +7,6 @@
         @input="onSearchItem"
         v-model="textSelected"
         autocomplete="off"
-        :id="id"
         class="text-form"
         type="text"
         :class="classInputCBox"
@@ -50,7 +49,6 @@ export default {
   name: "MCombobox",
   emits: ["update:modelValue", "textSelected"],
   props: [
-    "id",
     "propName",
     "propValue",
     "modelValue",

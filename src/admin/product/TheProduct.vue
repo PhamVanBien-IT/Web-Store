@@ -38,25 +38,15 @@
               </div>
               <div class="col-sm-2">
                 <div
-                  class="btn btn-delete btn-sm print-file js-textareacopybtn"
-                  type="button"
-                  title="Sao chép"
-                  @click="btnDuplicateProduct"
-                  ><font-awesome-icon icon="fa-solid fa-copy" /> Sao chép</div
+                  class="btn btn-excel btn-sm"
+                  title="In"
+                  @click="btnExportProducts"
                 >
+                  <font-awesome-icon icon="fa-solid fa-file-excel" /> Xuất Excel
+                </div>
               </div>
-              <div class="col-sm-2">
-                <a class="btn btn-excel btn-sm" href="" title="In"
-                  ><font-awesome-icon icon="fa-solid fa-file-excel" /> Xuất
-                  Excel</a
-                >
-              </div>
-              <div class="col-sm-2">
-                <a
-                  class="btn btn-delete btn-sm"
-                  type="button"
-                  title="Xóa"
-                  onclick="myFunction(this)"
+              <div class="col-sm-2" @click="deleteProductListSelect">
+                <a class="btn btn-delete btn-sm" type="button" title="Xóa"
                   ><font-awesome-icon icon="fa-solid fa-trash" /> Xóa tất cả
                 </a>
               </div>
@@ -222,7 +212,6 @@
                               id="chkProdTomove"
                               :value="item.productId"
                               v-model="selectedList"
-                              @click="selectProduct(item)"
                             />
                             <span class="check-box-effect"></span>
                           </label>
@@ -261,6 +250,15 @@
                             <font-awesome-icon
                               icon="fa-solid fa-pen-to-square"
                             />
+                          </button>
+                          <button
+                            class="btn btn-delete btn-sm print-file js-textareacopybtn ml-2"
+                            type="button"
+                            title="Nhân bản"
+                            id="show-emp-coppy"
+                            @click="btnDuplicateProduct(item)"
+                          >
+                            <font-awesome-icon :icon="['fass', 'print']" />
                           </button>
                         </td>
                       </tr>
@@ -307,16 +305,13 @@
         </div>
       </div>
     </div>
-    <MNotify 
-    v-if="diy.state.showNotify" 
-    :label="labelNotify"
-    ></MNotify>
+    <MNotify v-if="diy.state.showNotify" :label="labelNotify"></MNotify>
   </main>
   <MDialogVue
     v-if="diy.state.showDialog"
     :label="lableDialog"
     :classIcon="[isDialog ? 'icondelete' : 'warning']"
-    @EditEPL="deleteProduct"
+    @EditEPL="hanldeFunction"
   ></MDialogVue>
   <TheProductDetail
     :id="productId"
@@ -345,21 +340,75 @@ export default {
   },
   methods: {
     /**
-     * Hàm gắn dữ liệu cho form nhân bản sản phẩm
-     * @param {Sản phẩm được chọn} item 
-     * CreatedBy: Bien (20/03/2023)
+     * Hàm xuất khẩu dữ liệu sang file Excel
+     * CreatedBy: Bien (29/03/2023)
      */
-    selectProduct(item){
-      this.productDuplidate = item;
+    async btnExportProducts() {
+      try {
+        await productApi.exportProducts(this.textSearch);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    /**
+     * Hàm thực hiện chức năng tương ứng sau khi thông báo dialog
+     * CreatedBy: Bien (29/03/2023)
+     */
+    async hanldeFunction() {
+      // debugger
+      if (this.selectedList.length > 1) {
+        await this.deleteProducts();
+      } else {
+        await this.deleteProduct(this.selectedList);
+      }
+    },
+    /**
+     * Hàm thực hiện show dialog hỏi trước khi xóa hàng loạt sản phẩm được chọn
+     * CreatedBy: Bien (29/03/2023)
+     */
+    async deleteProductListSelect() {
+      if (this.selectedList.length > 0) {
+        this.lableDialog = this.$MISAResource.CONTENTDIALOG.DELETES("sản phẩm");
+        await this.diy.showDialog();
+      }
+
+      this.diy.clearBtnCancel();
+      this.diy.clearCloseDialog();
+    },
+    /**
+     * Hàm thực hiện gọi API xóa danh sách nhân viên
+     * CreatedBy: Bien (21/02/2023)
+     */
+    async deleteProducts() {
+      try {
+        this.diy.showLoading();
+
+        // Hàm thực hiện xóa khi xóa
+        const response = await productApi.deleteProducts(this.selectedList);
+
+        console.log(response);
+        if (response.isSuccess) {
+          this.labelNotify =
+            this.$MISAResource.LABELNOTIFY.DELETE("Danh sách sản phẩm");
+
+          this.diy.showNotify();
+
+          this.diy.clearLoading();
+
+          this.clickCallback(this.indexPage);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
     /**
      * Hàm nhân bản nhân viên
      * CreatedBy: Bien (20/1/2023)
      */
-     async btnDuplicateProduct() {
+    async btnDuplicateProduct(item) {
       try {
         // Lấy id nhân viên của hàng được chọn
-        this.productId = this.productDuplidate.productId;
+        this.productId = item.productId;
 
         const response = await productApi.getProductNewCode();
 
@@ -373,12 +422,12 @@ export default {
         console.log(error);
       }
     },
-     /**
+    /**
      * Hàm lấy thông tin sản phẩm theo id
      * @param {*Thông tin sản phẩm muốn lấy} item
      * CreatedBy: Bien (4/1/2023)
      */
-     rowOnDblClick(item) {
+    rowOnDblClick(item) {
       // Lấy id của hàng được chọn
       this.productId = item.productId;
 
@@ -414,11 +463,9 @@ export default {
      * Hàm xóa sản phẩm theo ID sản phẩm
      * CreatedBy: Bien (19/03/2023)
      */
-    async deleteProduct() {
+    async deleteProduct(productId) {
       try {
-        const response = await productApi.deleteProductById(this.productId);
-
-        console.log(this.productId);
+        const response = await productApi.deleteProductById(productId);
 
         console.log(response);
 
@@ -457,6 +504,7 @@ export default {
         }, []);
         this.selected = false;
       }
+      console.log(this.selectedList);
     },
 
     /**
@@ -557,10 +605,8 @@ export default {
   },
   data() {
     return {
-      // Dữ liệu nhân bản sản phẩm
-      productDuplidate:{},
       // Mã sản mới khi nhân bản
-      duplicateProductCode:null,
+      duplicateProductCode: null,
 
       // Hiển thị icon dialog tương ứng
       isDialog: false,
@@ -590,7 +636,7 @@ export default {
       indexPage: null,
 
       // Tổng số trang
-      totalPage:0,
+      totalPage: 0,
 
       // Khai báo biến nhận liMit
       liMit: 20,

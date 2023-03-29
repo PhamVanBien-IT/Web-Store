@@ -17,7 +17,7 @@ const state = reactive({
   showCloseDialog:true,
   showNotifyError:false,
   showFunctionAll:false,
-  showDialogDeleteEmployees:false,
+  showDialogDeletes:false,
   showBtnCancel:false,
   showDialogDevelop:false,
   showPageSize:false,
@@ -206,16 +206,16 @@ const clearDialog = function () {
  * Hàm hiển thị Dialog xóa nhiều
  * CreatedBy: Bien (4/1/2023)
  */
-const showDialogDeleteEmployees = function () {
-  state.showDialogDeleteEmployees = true;
+const showDialogDeletes = function () {
+  state.showDialogDeletes = true;
 };
 
 /**
  * Hàm ẩn Dialog xóa nhiều
  * CreatedBy: Bien (4/1/2023)
  */
-const clearDialogDeleteEmployees = function () {
-  state.showDialogDeleteEmployees = false;
+const clearDialogDeletes = function () {
+  state.showDialogDeletes = false;
 };
 
 
@@ -286,8 +286,8 @@ export default {
   showFunctionAll,
   clearFunctionAll,
   toggleFunctionAll,
-  showDialogDeleteEmployees,
-  clearDialogDeleteEmployees,
+  showDialogDeletes,
+  clearDialogDeletes,
   showBtnCancel,
   clearBtnCancel,
   clearDialogDevelop,

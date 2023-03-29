@@ -68,7 +68,6 @@
               v-click-outside-element="onClickOutsideCategory"
             >
               <MComboboxVue
-                id="cbxCategory"
                 title="Danh mục"
                 propName="categoryName"
                 propValue="categoryId"
@@ -82,7 +81,6 @@
             </div>
             <div class="col-12 col-g pd-left-0">
               <MComboboxVue
-                id="cbxSupplier"
                 title="Nhà cung cấp"
                 propName="supplierName"
                 propValue="supplierId"

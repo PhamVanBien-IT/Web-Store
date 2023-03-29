@@ -60,7 +60,7 @@ export default {
      */
     btnCloseEPLDetailOnClick() {
       this.diy.clearProductDetail();
-      this.diy.clearDialogDeleteEmployees();
+      this.diy.clearDialogDeletes();
       this.diy.clearDialog();
       this.diy.showCloseDialog();
     },
@@ -85,7 +85,7 @@ export default {
     funcEditEmployee() {
       this.$emit("EditEPL", this.funcEPL);
       this.diy.clearDialog();
-      this.diy.clearDialogDeleteEmployees();
+      this.diy.clearDialogDeletes();
       this.diy.clearFunctionAll();
       // Hiển thị nút đóng
       this.diy.showCloseDialog();

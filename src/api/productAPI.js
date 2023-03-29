@@ -1,5 +1,7 @@
 import axiosClient from "./axiosClient";
 const baseUrl = "Products/";
+import axios from "axios";
+
 
 /**
  * Các API liên quan đến Employee
@@ -7,13 +9,19 @@ const baseUrl = "Products/";
  */
 const productApi = {
     /**
-     * API xuất khẩu nhân viên
+     * API xuất khẩu sản phẩm
      * CreatedBy: Bien (20/02/2023)
      */
-    exportEmployees: (filter) => {
+     exportProducts: (filter) => {
         try {
+            let baseUrlExcel = ''
+            if(filter){
+                baseUrlExcel = `https://localhost:7145/api/Products/exportExcel?filter=${filter}`
+            }else{
+                baseUrlExcel = `https://localhost:7145/api/Products/exportExcel`
+            }
             axios({
-                url: `https://localhost:7185/api/Employees/ExportExcel?filter=${filter}`,
+                url: baseUrlExcel,
                 method: "GET",
                 responseType: "blob",
             }).then((response) => {
@@ -22,12 +30,12 @@ const productApi = {
                 var fileLink = document.createElement("a");
 
                 fileLink.href = fileURL;
-                fileLink.setAttribute("download", "Danh_sach_nhan_vien.xlsx");
+                fileLink.setAttribute("download", "Danh_sach_san_pham.xlsx");
 
                 fileLink.click();
             });
         } catch (error) {
-            console.log("Lỗi xuất khẩu nhân viên: " + error);
+            console.log("Lỗi xuất khẩu sản ph: " + error);
         }
     },
     /**
@@ -55,7 +63,7 @@ const productApi = {
         }
     },
     /**
-    * API sinh mã nhân viên mới
+    * API sinh mã sản phẩm mới
     * CreatedBy: Bien (20/01/2023)
     */
     getProductNewCode: () => {
@@ -66,8 +74,8 @@ const productApi = {
         }
     },
     /**
-    * API lấy nhân viên theo id
-    * @param {*Id nhân viên muốn lấy} id
+    * API lấy sản phẩm theo id
+    * @param {*Id sản phẩm muốn lấy} id
     * CreatedBy: Bien (20/01/2023)
     */
     getProductById: (id) => {
@@ -90,9 +98,9 @@ const productApi = {
         }
     },
     /**
-    * API sửa nhân viên
-    * @param {*Id nhân viên muốn xóa} id
-    * @param {*Nhân viên muốn sửa} newEmployee
+    * API sửa sản phẩm
+    * @param {*Id sản phẩm muốn sửa} id
+    * @param {*Sản phẩm muốn sửa} newProduct
     * CreatedBy: Bien (20/01/2023)
     */
     updateProduct: (id, newProduct) => {
@@ -103,7 +111,7 @@ const productApi = {
         }
     },
     /**
-    * API xóa nhân viên
+    * API xóa sản phẩm
     * @param {*Id sản phẩm muốn xóa} id
     * CreatedBy: Bien (20/01/2023)
     */
@@ -115,20 +123,20 @@ const productApi = {
         }
     },
     /**
-     * API xóa hàng loạt nhân viên
-     * @param {*Danh sách id nhân viên muốn xóa} employeeIds 
+     * API xóa hàng loạt sản phẩm
+     * @param {*Danh sách id sảm phẩm muốn xóa} productIds 
      * @returns 
      * 1: Nếu xóa thành công
      * 0: Nếu xóa thất bại    
      * CreatedBy: Bien (20/01/2023)
      */
-    deleteEmployees: (employeeIds) => {
+    deleteProducts: (productIds) => {
         try {
-            return axios.delete("https://localhost:7185/api/Employees/Deletes", {
-                data: employeeIds
+            return axiosClient.delete(baseUrl,{
+                data: productIds
             })
         } catch (error) {
-            console.log("Lỗi xóa nhiều nhân viên: " + error);
+            console.log("Lỗi xóa nhiều nhân viên: "+error);
         }
     }
 };
